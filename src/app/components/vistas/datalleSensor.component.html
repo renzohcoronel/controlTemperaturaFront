@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="ui-g">
+        <div class="ui-lg-12" *ngIf="sensorSelected"> 
+            <h2>Modificar Sensor</h2>
+            <label>Descripcion: <input id="descripcion" type="text" size="30" pInputText [(ngModel)]="sensorSelected.descripcion"></label> <br>
+            <label>Valor Set:<input id="valorSet" type="text" size="30" pInputText [(ngModel)]="sensorSelected.valorSet"> </label> <br>
+            <button pButton type="button" (click)="goBack()" label="Atras"></button>
+            <button pButton type="button" (click)="modificarSensor(sensorSelected)" label="Modificar"></button>
+        </div>
+
+          
+    </div>
+</div>

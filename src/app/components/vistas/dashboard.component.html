@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-4" *ngFor="let sensor of sensores">
+                <h1> {{sensor.valor}} °</h1>
+                <h3> {{sensor.descripcion}}</h3>
+                <h4> Temp. Seteada: {{sensor.valorSet}}</h4>
+                <button pButton type="button" (click)="onclick(sensor)" label="Modificar"></button>
+
+            </div>
+        
+    </div>
+</div>
