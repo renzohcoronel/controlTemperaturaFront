@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard.component';
 import { DetalleSensorComponent } from './components/detalleSensor.component';
 import { SensoresService } from './components/services/sensor.service';
+import { StompService } from 'ng2-stomp-service';
+
 
 
 @NgModule({
@@ -27,7 +29,7 @@ import { SensoresService } from './components/services/sensor.service';
     InputTextModule,
     AppRoutingModule
   ],
-  providers: [SensoresService],
+  providers: [SensoresService, StompService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
