@@ -11,13 +11,13 @@ export class SensoresService {
     constructor(private http: Http) { }
 
     getSenores(): Observable<Sensor[]> {
-       return this.http.get("http://localhost:8080/sensores").
+       return this.http.get("/sensores").
        map( (response) => response.json() as Sensor[]);
     }
 
     getSenor(id: number): Observable<Sensor> {
-        console.log('ID :' + id + " " + `http://localhost:8080/sensor/${id}`);
-       return this.http.get(`http://localhost:8080/sensor/${id}`)
+        console.log('ID :' + id + " " + `/sensor/${id}`);
+       return this.http.get(`/sensor/${id}`)
        .map(response => { 
            console.log(response.json());
            return response.json() as Sensor});
@@ -27,7 +27,7 @@ export class SensoresService {
           console.log("Sensor " + sensor);
           let headers = new Headers({ 'Content-Type': 'application/json' });
           let options = new RequestOptions({ headers: headers });
-         return this.http.post(`http://localhost:8080/sensor`,  sensor , options)
+         return this.http.post(`/sensor`,  sensor , options)
          .map((response) => response.json() as Sensor );
     }
 
