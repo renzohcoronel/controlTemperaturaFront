@@ -41,8 +41,8 @@ export class DashboardComponent implements OnInit  {
      }
 
     onclick(sensor: Sensor): void {
-        this.stomp.send('http://localhost:8080/sensoresUpdate', JSON.stringify({text: 'nombre' }));
-       //this.router.navigate(['/detalleSensor', sensor.id]);
+        //this.stomp.send('http://localhost:8080/app/sensoresUpdate', "{text: 'nombre' }");
+         this.router.navigate(['/detalleSensor', sensor.id]);
     }
 }
 
