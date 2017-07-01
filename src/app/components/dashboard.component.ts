@@ -3,9 +3,9 @@ import { Sensor } from '../modelo/sensor';
 import {ButtonModule} from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { SensoresService } from './services/sensor.service';
-import { StompService } from 'ng2-stomp-service';
-
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { Observable } from 'rxjs/Observable';
+import { Subscription as RxSubscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'dashboard',
@@ -16,44 +16,33 @@ import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
 
 export class DashboardComponent implements OnInit  {
-    
     sensores: Sensor[];
-    private subscription: any;
-
+    subcription: RxSubscription;
     constructor(private router: Router,
-                private sensorService: SensoresService, 
-                private stomp: StompService  ) {
-                stomp.configure({
-                    host: '/sensoresSocket',
-                    debug: true,
-                    queue: { 'init': false, 'user': false}
-                });
+                private sensorService: SensoresService ) {
 
-                stomp.startConnect().then(() => {
-                    stomp.done('init');
-                 });
-
-                  stomp.after('init').then(() => {
-                  this.subscription = stomp.subscribe('/topic/sensoresUpdate', (data) => console.log(data) )});
-
-
-                  
-
-                 }
-
+                }
     ngOnInit(): void {
 
-        IntervalObservable.create(5000).subscribe(() => {
+        this.subcription = IntervalObservable.create(5000).subscribe(() => {
             this.sensorService.getSenores()
-            .subscribe((sensoreshttp: Sensor[]) => this.sensores = sensoreshttp);
+            .subscribe((sensoreshttp: Sensor[]) => this.sensores = sensoreshttp, (error: any) => {
+                let jsonData = JSON.parse(error._body);
+                if ( jsonData.status == '500' ) {
+                          this.subcription.unsubscribe();
+                          this.router.navigate(['/login']);
+                }
+            });
         });
-        
      }
 
-     
     onclick(sensor: Sensor): void {
-        //this.stomp.send('http://localhost:8080/app/sensoresUpdate', "{text: 'nombre' }");
          this.router.navigate(['/detalleSensor', sensor.id]);
+    }
+
+    onLogout(): void {
+        this.sensorService.logout();
+        this.router.navigate(['/login']);
     }
 }
 

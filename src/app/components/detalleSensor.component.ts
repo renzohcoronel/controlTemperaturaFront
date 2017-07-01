@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Sensor } from '../modelo/sensor';
 import { SensoresService } from './services/sensor.service';
 import {ButtonModule} from 'primeng/primeng';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -22,7 +23,13 @@ export class DetalleSensorComponent implements OnInit {
 
     ngOnInit(): void {
       this.route.params.switchMap((params: Params) => this.sensorService.getSenor(+params['id']))
-      .subscribe((sensor) => this.sensorSelected = sensor);
+      .subscribe((sensor) => this.sensorSelected = sensor, (error: any) => {
+                  console.log('Error al obtener el sensor');
+                  let jsonData = JSON.parse(error._body);
+                  if ( jsonData.status == '500' ) {
+                          this.location.go('/login');
+                  }
+            });
      }
 
      modificarSensor(sensor: Sensor): void {

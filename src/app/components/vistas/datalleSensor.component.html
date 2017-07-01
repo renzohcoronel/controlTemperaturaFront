@@ -1,13 +1,34 @@
-<div class="container-fluid">
-    <div class="ui-g">
-        <div class="ui-lg-12" *ngIf="sensorSelected"> 
+<!--<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 text-center" *ngIf="sensorSelected"> 
             <h2>Modificar Sensor</h2>
             <label>Descripcion: <input id="descripcion" type="text" size="30" pInputText [(ngModel)]="sensorSelected.descripcion"></label> <br>
             <label>Valor Set:<input id="valorSet" type="text" size="30" pInputText [(ngModel)]="sensorSelected.valorSet"> </label> <br>
-            <button pButton type="button" (click)="goBack()" label="Atras"></button>
-            <button pButton type="button" (click)="modificarSensor(sensorSelected)" label="Modificar"></button>
+            <button pButton type="button" class="btn btn-success" (click)="goBack()" label="Atras"></button>
+            <button pButton type="button" class="btn btn-success" (click)="modificarSensor(sensorSelected)" label="Modificar"></button>
         </div>
 
           
     </div>
 </div>
+-->
+    <div class="container">
+
+         <form #detalleForm="ngForm" (ngSubmit)="modificarSensor()" *ngIf="sensorSelected">
+          <div class="form-group">
+            <label for="descripcion">Descripcion :</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="sensorSelected.descripcion" required>
+          </div>
+     
+          <div class="form-group">
+            <label for="valorSet">Valor Set: </label>
+            <input type="text" class="form-control" id="valorSet" name="valorSet" [(ngModel)]="sensorSelected.valorSet" required>
+          </div>
+     
+          <button pButton type="button" class="btn btn-success" (click)="goBack()" label="Atras"></button>
+        <button pButton type="button" class="btn btn-success" label="Modificar"></button>
+   
+     
+        </form>
+
+    </div>

@@ -1,12 +1,18 @@
+
 <div class="container-fluid">
-    <div class="ui-g">
-            <div class="ui-g-12 ui-md-6 ui-lg-4" *ngFor="let sensor of sensores">
+    <div class="row">
+         <div class="col-lg-12  text-center">
+             <button type="button" class="btn btn-link" (click)="onLogout()">Logout</button>
+          </div> 
+    </div>   
+    <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-4 col-centered text-center" *ngFor="let sensor of sensores">
                 <h1> {{sensor.valor}} °</h1>
                 <h3> {{sensor.descripcion}}</h3>
                 <h4> Temp. Seteada: {{sensor.valorSet}}</h4>
-                <button pButton type="button" (click)="onclick(sensor)" label="Modificar"></button>
-
+                <button pButton type="button" class="btn btn-success" (click)="onclick(sensor)" label="Modificar"></button>
+        
             </div>
         
     </div>
-</div>
+</div> 

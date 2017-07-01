@@ -10,16 +10,15 @@ import {ButtonModule, InputTextModule} from 'primeng/primeng';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard.component';
 import { DetalleSensorComponent } from './components/detalleSensor.component';
+import { LoginComponent } from './components/login.component';
 import { SensoresService } from './components/services/sensor.service';
-import { StompService } from 'ng2-stomp-service';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    DetalleSensorComponent
+    DetalleSensorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +28,7 @@ import { StompService } from 'ng2-stomp-service';
     InputTextModule,
     AppRoutingModule
   ],
-  providers: [SensoresService, StompService],
+  providers: [SensoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
