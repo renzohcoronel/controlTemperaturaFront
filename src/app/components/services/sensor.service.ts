@@ -18,7 +18,7 @@ export class SensoresService {
                                      'Authorization': 'Bearer ' + this.getToken() });
         let options = new RequestOptions({ headers: headers });
 
-       return this.http.get('/api/sensores', options).
+       return this.http.get('/sensores', options).
        map( (response) => response.json() as Sensor[]).catch((error: any) => this.handleError(error));
     }
 
@@ -27,17 +27,18 @@ export class SensoresService {
          let headers = new Headers({ 'Content-Type': 'application/json',
                                      'Authorization': this.getToken() });
           let options = new RequestOptions({ headers: headers });
-       return this.http.get(`/api/sensor/${id}`, options)
+       return this.http.get(`/sensor/${id}`, options)
        .map(response => { 
            console.log('Response ' + response.json());
            return response.json() as Sensor}).catch((error: any) => this.handleError(error));
             }
 
     setSensorData(sensor: Sensor):  Observable<Sensor> {
+        console.log('Envio datos a modificar');
           let headers = new Headers({ 'Content-Type': 'application/json',
                                      'Authorization': this.getToken() });
           let options = new RequestOptions({ headers: headers });
-         return this.http.post(`/api/sensor`,  sensor , options)
+         return this.http.post(`/sensor`,  sensor , options)
          .map((response) => response.json() as Sensor );
     }
 
@@ -46,7 +47,7 @@ export class SensoresService {
         let options = new RequestOptions(
             { headers: headers});
         console.log(options);
-        return this.http.post(`/api/login`, user , options).map((response) => {
+        return this.http.post(`/login`, user , options).map((response) => {
             let token = response.headers.get('Authorization');
             if ( token ) {
                   localStorage.setItem('currentUser', JSON.stringify({ user: user, token: token }));

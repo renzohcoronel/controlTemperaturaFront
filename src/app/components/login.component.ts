@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(): void {
-        console.log(this.user);
        this.sensorService.login(this.user).subscribe((response: boolean) => {
            if ( response ) {
                 this.login = true;
